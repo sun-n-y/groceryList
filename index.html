@@ -12,6 +12,39 @@
 </head>
 
 <body>
+    <form class="form-container">
+        <p class="alert">please enter value</p>
+        <h2 class="title">grocery bud</h2>
+        <div class="form-input">
+            <input type="text" name="input" id="input" placeholder="e.g. eggs">
+            <button type="submit">submit</button>
+        </div>
+        <div class="list-container">
+            <div class="list-item" data-id="1">
+                <p class="item-info">milk</p>
+                <div class="btn-container">
+                    <button class="edit-btn">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="trash-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="list-item" data-id="2">
+                <p class="item-info">juice</p>
+                <div class="btn-container">
+                    <button class="edit-btn">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="trash-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="clear-btn">clear items</button>
+    </form>
     <script src="app.js"></script>
 </body>
 
