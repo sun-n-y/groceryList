@@ -73,3 +73,69 @@ body {
     color: white;
     background-color: rgba(0, 132, 255, 0.884);
 }
+
+.list-container {
+    margin: 2rem 0;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .7rem 1rem;
+    transition: all .5s ease;
+    margin-bottom: .5rem;
+    border-radius: .5rem;
+}
+
+.list-item:hover {
+    background-color: aliceblue;
+}
+
+.item-info {
+    letter-spacing: 2px;
+}
+
+.btn-container {
+    display: flex;
+    column-gap: .7rem;
+}
+
+.edit-btn {
+    border: none;
+    background-color: transparent;
+    color: rgba(7, 204, 83, 0.795);
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.edit-btn:hover {
+    color: rgba(2, 139, 14, 0.863);
+}
+
+.trash-btn {
+    border: none;
+    background-color: transparent;
+    color: rgba(255, 8, 0, 0.753);
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.trash-btn:hover {
+    color: rgba(165, 8, 2, 0.753);
+}
+
+.clear-btn {
+    background-color: transparent;
+    border: none;
+    text-transform: capitalize;
+    letter-spacing: 3px;
+    color: rgba(209, 8, 1, 0.644);
+    cursor: pointer;
+    transition: all .5s ease;
+    font-size: .9rem;
+}
+
+.clear-btn:hover {
+    color: rgba(114, 4, 0, 0.644);
+}
