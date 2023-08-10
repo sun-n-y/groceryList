@@ -3,6 +3,7 @@ const alert = document.querySelector('.alert');
 const input = document.querySelector('#input');
 const submitBtn = document.querySelector('.submit-btn');
 const listContainer = document.querySelector('.list-container');
+const clearBtn = document.querySelector('.clear-btn');
 
 let editFlag = false;
 let editID = '';
@@ -29,9 +30,23 @@ form.addEventListener('submit', (e) => {
                         <i class="fa-solid fa-trash"></i>
                     </button>`;
     listContainer.appendChild(element);
-    showAlert('item added', 'sucess');
+    showAlert('item added to list', 'sucess');
     restoreForm();
   }
+  if (listContainer.contains(listContainer.firstChild)) {
+    clearBtn.classList.add('show-clearbtn');
+  }
+});
+
+clearBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  while (listContainer.firstChild) {
+    listContainer.removeChild(listContainer.firstChild);
+  }
+  showAlert('list emptied', 'fail');
+  setTimeout(() => {
+    clearBtn.classList.remove('show-clearbtn');
+  }, 1000);
 });
 
 function showAlert(text, alertType) {

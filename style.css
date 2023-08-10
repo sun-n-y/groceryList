@@ -143,6 +143,12 @@ body {
     cursor: pointer;
     transition: all .5s ease;
     font-size: .9rem;
+    height: 16px;
+    visibility: hidden;
+}
+
+.show-clearbtn {
+    visibility: visible;
 }
 
 .clear-btn:hover {
