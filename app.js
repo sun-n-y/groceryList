@@ -31,6 +31,8 @@ form.addEventListener('submit', (e) => {
     listContainer.appendChild(element);
     showAlert('item added to list', 'sucess');
     restoreForm();
+  } else if (editFlag && inputValue) {
+    console.log('edit');
   }
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
@@ -55,8 +57,9 @@ window.addEventListener('click', (e) => {
   }
   if (e.target.parentElement.classList.contains('edit-btn')) {
     e.preventDefault();
-    const itemValue = document.querySelector('.item-info');
-    input.value = itemValue.textContent;
+    const itemValue =
+      e.target.parentElement.parentElement.previousElementSibling.textContent;
+    input.value = itemValue;
     editFlag = true;
     submitBtn.textContent = 'edit';
   }
