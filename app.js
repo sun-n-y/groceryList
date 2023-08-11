@@ -7,7 +7,7 @@ const clearBtn = document.querySelector('.clear-btn');
 
 let editFlag = false;
 let editID = '';
-let submitBtn1 = 'submit';
+let editBtn = 'edit';
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -38,6 +38,18 @@ form.addEventListener('submit', (e) => {
   }
 });
 
+window.addEventListener('click', (e) => {
+  if (e.target.parentElement.classList.contains('trash-btn')) {
+    e.preventDefault();
+    console.log('delete');
+  }
+  if (e.target.parentElement.classList.contains('edit-btn')) {
+    e.preventDefault();
+    console.log('edit');
+  }
+});
+
+// clear btn
 clearBtn.addEventListener('click', (e) => {
   e.preventDefault();
   while (listContainer.firstChild) {
@@ -49,6 +61,7 @@ clearBtn.addEventListener('click', (e) => {
   }, 1000);
 });
 
+// show alert
 function showAlert(text, alertType) {
   alert.textContent = `${text}`;
   alert.classList.add(alertType);
@@ -58,8 +71,9 @@ function showAlert(text, alertType) {
   }, 2000);
 }
 
+// restore form
 function restoreForm() {
   input.value = '';
   editFlag = false;
-  submitBtn1 = 'submit';
+  editID = '';
 }
