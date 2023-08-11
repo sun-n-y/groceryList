@@ -51,7 +51,7 @@ body {
 
 .form-input {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 80px;
     margin: 1.5rem 0;
 }
 
