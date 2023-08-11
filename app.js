@@ -41,7 +41,16 @@ form.addEventListener('submit', (e) => {
 window.addEventListener('click', (e) => {
   if (e.target.parentElement.classList.contains('trash-btn')) {
     e.preventDefault();
-    console.log('delete');
+    listContainer.removeChild(
+      e.target.parentElement.parentElement.parentElement
+    );
+    showAlert('item removed', 'fail');
+    if (listContainer.contains(listContainer.firstChild)) {
+      clearBtn.classList.add('show-clearbtn');
+    } else {
+      clearBtn.classList.remove('show-clearbtn');
+      showAlert('list emptied', 'fail');
+    }
   }
   if (e.target.parentElement.classList.contains('edit-btn')) {
     e.preventDefault();
