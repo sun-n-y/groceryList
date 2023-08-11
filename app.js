@@ -7,7 +7,6 @@ const clearBtn = document.querySelector('.clear-btn');
 
 let editFlag = false;
 let editID = '';
-let editBtn = 'edit';
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -45,6 +44,8 @@ window.addEventListener('click', (e) => {
       e.target.parentElement.parentElement.parentElement
     );
     showAlert('item removed', 'fail');
+    restoreForm();
+    submitBtn.textContent = 'submit';
     if (listContainer.contains(listContainer.firstChild)) {
       clearBtn.classList.add('show-clearbtn');
     } else {
@@ -54,7 +55,10 @@ window.addEventListener('click', (e) => {
   }
   if (e.target.parentElement.classList.contains('edit-btn')) {
     e.preventDefault();
-    console.log('edit');
+    const itemValue = document.querySelector('.item-info');
+    input.value = itemValue.textContent;
+    editFlag = true;
+    submitBtn.textContent = 'edit';
   }
 });
 
@@ -65,6 +69,7 @@ clearBtn.addEventListener('click', (e) => {
     listContainer.removeChild(listContainer.firstChild);
   }
   showAlert('list emptied', 'fail');
+  restoreForm();
   setTimeout(() => {
     clearBtn.classList.remove('show-clearbtn');
   }, 1000);
