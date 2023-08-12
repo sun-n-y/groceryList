@@ -36,7 +36,7 @@ form.addEventListener('submit', (e) => {
     deleteBtn.addEventListener('click', deleteItem);
     restoreForm();
   } else if (editFlag && inputValue) {
-    console.log('submit edit');
+    console.log(inputValue, editID);
   }
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
@@ -66,6 +66,7 @@ function editItem(e) {
   input.value = itemValue;
   editFlag = true;
   submitBtn.textContent = 'edit';
+  editID = e.target.parentElement.parentElement.parentElement.dataset.id;
 }
 
 // clear btn
