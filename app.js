@@ -30,6 +30,10 @@ form.addEventListener('submit', (e) => {
                     </button>`;
     listContainer.appendChild(element);
     showAlert('item added to list', 'sucess');
+    const editBtn = element.querySelector('.edit-btn');
+    editBtn.addEventListener('click', editItem);
+    const deleteBtn = element.querySelector('.trash-btn');
+    deleteBtn.addEventListener('click', deleteItem);
     restoreForm();
   } else if (editFlag && inputValue) {
     console.log('edit');
@@ -39,31 +43,43 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-window.addEventListener('click', (e) => {
-  if (e.target.parentElement.classList.contains('trash-btn')) {
-    e.preventDefault();
-    listContainer.removeChild(
-      e.target.parentElement.parentElement.parentElement
-    );
-    showAlert('item removed', 'fail');
-    restoreForm();
-    submitBtn.textContent = 'submit';
-    if (listContainer.contains(listContainer.firstChild)) {
-      clearBtn.classList.add('show-clearbtn');
-    } else {
-      clearBtn.classList.remove('show-clearbtn');
-      showAlert('list emptied', 'fail');
-    }
-  }
-  if (e.target.parentElement.classList.contains('edit-btn')) {
-    e.preventDefault();
-    const itemValue =
-      e.target.parentElement.parentElement.previousElementSibling.textContent;
-    input.value = itemValue;
-    editFlag = true;
-    submitBtn.textContent = 'edit';
-  }
-});
+// window.addEventListener('click', (e) => {
+//   if (e.target.parentElement.classList.contains('trash-btn')) {
+//     e.preventDefault();
+//     listContainer.removeChild(
+//       e.target.parentElement.parentElement.parentElement
+//     );
+//     showAlert('item removed', 'fail');
+//     restoreForm();
+//     submitBtn.textContent = 'submit';
+//     if (listContainer.contains(listContainer.firstChild)) {
+//       clearBtn.classList.add('show-clearbtn');
+//     } else {
+//       clearBtn.classList.remove('show-clearbtn');
+//       showAlert('list emptied', 'fail');
+//     }
+//   }
+//   if (e.target.parentElement.classList.contains('edit-btn')) {
+//     e.preventDefault();
+//     const itemValue =
+//       e.target.parentElement.parentElement.previousElementSibling.textContent;
+//     input.value = itemValue;
+//     editFlag = true;
+//     submitBtn.textContent = 'edit';
+//   }
+// });
+
+//delete
+function deleteItem(e) {
+  e.preventDefault();
+  console.log('delete');
+}
+
+//edit
+function editItem(e) {
+  e.preventDefault();
+  console.log('edit');
+}
 
 // clear btn
 clearBtn.addEventListener('click', (e) => {
