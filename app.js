@@ -7,6 +7,7 @@ const clearBtn = document.querySelector('.clear-btn');
 
 let editFlag = false;
 let editID = '';
+let editElement;
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -36,7 +37,8 @@ form.addEventListener('submit', (e) => {
     deleteBtn.addEventListener('click', deleteItem);
     restoreForm();
   } else if (editFlag && inputValue) {
-    console.log(inputValue, editID);
+    editElement.firstChild.textContent = inputValue;
+    restoreForm();
   }
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
@@ -63,6 +65,7 @@ function editItem(e) {
   e.preventDefault();
   const itemValue =
     e.target.parentElement.parentElement.previousElementSibling.textContent;
+  editElement = e.target.parentElement.parentElement.parentElement;
   input.value = itemValue;
   editFlag = true;
   submitBtn.textContent = 'edit';
@@ -97,4 +100,5 @@ function restoreForm() {
   input.value = '';
   editFlag = false;
   editID = '';
+  editElement = '';
 }
