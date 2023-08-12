@@ -36,7 +36,7 @@ form.addEventListener('submit', (e) => {
     deleteBtn.addEventListener('click', deleteItem);
     restoreForm();
   } else if (editFlag && inputValue) {
-    console.log('edit');
+    console.log('submit edit');
   }
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
@@ -72,13 +72,26 @@ form.addEventListener('submit', (e) => {
 //delete
 function deleteItem(e) {
   e.preventDefault();
-  console.log('delete');
+  listContainer.removeChild(e.target.parentElement.parentElement.parentElement);
+  showAlert('item removed', 'fail');
+  restoreForm();
+  submitBtn.textContent = 'submit';
+  if (listContainer.contains(listContainer.firstChild)) {
+    clearBtn.classList.add('show-clearbtn');
+  } else {
+    clearBtn.classList.remove('show-clearbtn');
+    showAlert('list emptied', 'fail');
+  }
 }
 
 //edit
 function editItem(e) {
   e.preventDefault();
-  console.log('edit');
+  const itemValue =
+    e.target.parentElement.parentElement.previousElementSibling.textContent;
+  input.value = itemValue;
+  editFlag = true;
+  submitBtn.textContent = 'edit';
 }
 
 // clear btn
