@@ -38,6 +38,7 @@ form.addEventListener('submit', (e) => {
     restoreForm();
   } else if (editFlag && inputValue) {
     editElement.firstChild.textContent = inputValue;
+    showAlert('item edited', 'sucess');
     restoreForm();
   }
   if (listContainer.contains(listContainer.firstChild)) {
