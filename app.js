@@ -30,6 +30,7 @@ form.addEventListener('submit', (e) => {
                         <i class="fa-solid fa-trash"></i>
                     </button>`;
     listContainer.appendChild(element);
+    setItem(inputValue, id);
     showAlert('item added to list', 'sucess');
     const editBtn = element.querySelector('.edit-btn');
     editBtn.addEventListener('click', editItem);
@@ -102,4 +103,10 @@ function restoreForm() {
   editFlag = false;
   editID = '';
   editElement = '';
+}
+
+//set item to locale storage
+function setItem(value, id) {
+  const object = { id, value };
+  localStorage.setItem('list', JSON.stringify(object));
 }
