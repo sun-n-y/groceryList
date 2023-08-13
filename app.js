@@ -40,6 +40,7 @@ form.addEventListener('submit', (e) => {
   } else if (editFlag && inputValue) {
     editElement.firstChild.textContent = inputValue;
     showAlert('item edited', 'sucess');
+    editItemLocaleStorage(inputValue, editElement.dataset.id);
     restoreForm();
   }
   if (listContainer.contains(listContainer.firstChild)) {
@@ -115,4 +116,10 @@ function setItem(value, id) {
   }
   list.push({ id, value });
   localStorage.setItem('list', JSON.stringify(list));
+}
+
+//edit item local storage
+function editItemLocaleStorage(value, id) {
+  const list = JSON.parse(localStorage.getItem('list'));
+  console.log(list, value, id);
 }
