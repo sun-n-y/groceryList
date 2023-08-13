@@ -42,7 +42,6 @@ form.addEventListener('submit', (e) => {
     showAlert('item edited', 'sucess');
     editItemLocaleStorage(inputValue, editElement.dataset.id);
     restoreForm();
-    submitBtn.textContent = 'submit';
   }
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
@@ -53,6 +52,14 @@ form.addEventListener('submit', (e) => {
 function deleteItem(e) {
   e.preventDefault();
   listContainer.removeChild(e.target.parentElement.parentElement.parentElement);
+  const deleteId =
+    e.target.parentElement.parentElement.parentElement.dataset.id;
+  let list = JSON.parse(localStorage.getItem('list'));
+  list = list.filter(function (obj) {
+    return obj !== deleteId;
+  });
+  console.log(list);
+  localStorage.setItem('list', JSON.stringify(list));
   showAlert('item removed', 'fail');
   restoreForm();
   submitBtn.textContent = 'submit';
@@ -126,4 +133,5 @@ function restoreForm() {
   editFlag = false;
   editID = '';
   editElement = '';
+  submitBtn.textContent = 'submit';
 }
