@@ -107,6 +107,12 @@ function restoreForm() {
 
 //set item to locale storage
 function setItem(value, id) {
-  const object = { id, value };
-  localStorage.setItem('list', JSON.stringify(object));
+  let list;
+  if (localStorage.getItem('list')) {
+    list = JSON.parse(localStorage.getItem('list'));
+  } else {
+    list = [];
+  }
+  list.push({ id, value });
+  localStorage.setItem('list', JSON.stringify(list));
 }
