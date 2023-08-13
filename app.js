@@ -42,6 +42,7 @@ form.addEventListener('submit', (e) => {
     showAlert('item edited', 'sucess');
     editItemLocaleStorage(inputValue, editElement.dataset.id);
     restoreForm();
+    submitBtn.textContent = 'submit';
   }
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
@@ -98,14 +99,6 @@ function showAlert(text, alertType) {
   }, 2000);
 }
 
-// restore form
-function restoreForm() {
-  input.value = '';
-  editFlag = false;
-  editID = '';
-  editElement = '';
-}
-
 //set item to locale storage
 function setItem(value, id) {
   let list;
@@ -121,5 +114,13 @@ function setItem(value, id) {
 //edit item local storage
 function editItemLocaleStorage(value, id) {
   const list = JSON.parse(localStorage.getItem('list'));
-  console.log(list, value, id);
+  console.log(list);
+}
+
+// restore form
+function restoreForm() {
+  input.value = '';
+  editFlag = false;
+  editID = '';
+  editElement = '';
 }
