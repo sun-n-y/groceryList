@@ -30,7 +30,7 @@ form.addEventListener('submit', (e) => {
                         <i class="fa-solid fa-trash"></i>
                     </button>`;
     listContainer.appendChild(element);
-    setItem(inputValue, id);
+    setItemLocaleStorage(inputValue, id);
     showAlert('item added to list', 'sucess');
     const editBtn = element.querySelector('.edit-btn');
     editBtn.addEventListener('click', editItem);
@@ -46,6 +46,19 @@ form.addEventListener('submit', (e) => {
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
   }
+});
+
+// clear btn
+clearBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  while (listContainer.firstChild) {
+    listContainer.removeChild(listContainer.firstChild);
+  }
+  showAlert('list emptied', 'fail');
+  restoreForm();
+  setTimeout(() => {
+    clearBtn.classList.remove('show-clearbtn');
+  }, 1000);
 });
 
 //delete
@@ -81,19 +94,6 @@ function editItem(e) {
   editID = e.target.parentElement.parentElement.parentElement.dataset.id;
 }
 
-// clear btn
-clearBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  while (listContainer.firstChild) {
-    listContainer.removeChild(listContainer.firstChild);
-  }
-  showAlert('list emptied', 'fail');
-  restoreForm();
-  setTimeout(() => {
-    clearBtn.classList.remove('show-clearbtn');
-  }, 1000);
-});
-
 // show alert
 function showAlert(text, alertType) {
   alert.textContent = `${text}`;
@@ -105,7 +105,7 @@ function showAlert(text, alertType) {
 }
 
 //set item to locale storage
-function setItem(value, id) {
+function setItemLocaleStorage(value, id) {
   let list;
   if (localStorage.getItem('list')) {
     list = JSON.parse(localStorage.getItem('list'));
