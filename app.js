@@ -9,6 +9,24 @@ let editFlag = false;
 let editID = '';
 let editElement;
 
+// window.addEventListener('DOMContentLoaded', () => {
+//   if (localStorage.getItem('list')) {
+//     const list = JSON.parse(localStorage.getItem('list'));
+//     listContainer.innerHTML = list
+//       .map((obj) => {
+//         return `<div class="list-item" data-id=${obj.id}><p class="item-info">${obj.value}</p><div class="btn-container"><button class="edit-btn">
+//             <i class="fa-solid fa-pen-to-square"></i>
+//           </button>
+//           <button class="trash-btn">
+//             <i class="fa-solid fa-trash"></i>
+//           </button>
+//         </div>
+//       </div>`;
+//       })
+//       .join('');
+//   }
+// });
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const inputValue = input.value;
@@ -54,6 +72,7 @@ clearBtn.addEventListener('click', (e) => {
   while (listContainer.firstChild) {
     listContainer.removeChild(listContainer.firstChild);
   }
+  localStorage.removeItem('list');
   showAlert('list emptied', 'fail');
   restoreForm();
   setTimeout(() => {
