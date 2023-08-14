@@ -51,18 +51,16 @@ form.addEventListener('submit', (e) => {
 //delete
 function deleteItem(e) {
   e.preventDefault();
-  listContainer.removeChild(e.target.parentElement.parentElement.parentElement);
   const deleteId =
     e.target.parentElement.parentElement.parentElement.dataset.id;
   let list = JSON.parse(localStorage.getItem('list'));
   list = list.filter(function (obj) {
-    return obj !== deleteId;
+    return obj.id != deleteId;
   });
-  console.log(list);
   localStorage.setItem('list', JSON.stringify(list));
+  listContainer.removeChild(e.target.parentElement.parentElement.parentElement);
   showAlert('item removed', 'fail');
   restoreForm();
-  submitBtn.textContent = 'submit';
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
   } else {
@@ -124,7 +122,6 @@ function editItemLocaleStorage(value, id) {
   const searchObject = list.find((item) => item.id == id);
   searchObject.value = value;
   localStorage.setItem('list', JSON.stringify(list));
-  console.log(list);
 }
 
 // restore form
