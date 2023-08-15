@@ -30,6 +30,8 @@ form.addEventListener('submit', (e) => {
     showAlert('item edited', 'sucess');
     editItemLocaleStorage(inputValue, editID);
     restoreForm();
+  } else {
+    showAlert('please enter value', 'fail');
   }
   if (listContainer.contains(listContainer.firstChild)) {
     clearBtn.classList.add('show-clearbtn');
@@ -64,23 +66,22 @@ function showAlert(text, alertType) {
 
 // restore form
 function restoreForm() {
-  input.value = '';
+  editElement = '';
   editFlag = false;
   editID = '';
-  editElement = '';
+  input.value = '';
   submitBtn.textContent = 'submit';
 }
 
 //edit
 function editItem(e) {
   e.preventDefault();
-  const itemValue =
-    e.target.parentElement.parentElement.previousElementSibling.textContent;
-  // editElement = e.target.parentElement.parentElement.parentElement;
-  input.value = itemValue;
+  editElement = e.target.parentElement.parentElement.parentElement;
   editFlag = true;
+  editID = editElement.dataset.id;
   submitBtn.textContent = 'edit';
-  editID = e.target.parentElement.parentElement.parentElement.dataset.id;
+  const itemValue = editElement.firstChild.textContent;
+  input.value = itemValue;
 }
 
 //delete
