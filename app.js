@@ -16,9 +16,7 @@ window.addEventListener('DOMContentLoaded', loadItems);
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const inputValue = input.value;
-  if (!editFlag && !inputValue) {
-    showAlert('please enter value', 'fail');
-  } else if (!editFlag && inputValue) {
+  if (!editFlag && inputValue) {
     const id = new Date().getTime();
     createElement(inputValue, id);
     setItemLocaleStorage(inputValue, id);
@@ -27,8 +25,8 @@ form.addEventListener('submit', (e) => {
   } else if (editFlag && inputValue) {
     editElement.firstChild.textContent = inputValue;
     editID = editElement.dataset.id;
-    showAlert('item edited', 'sucess');
     editItemLocaleStorage(inputValue, editID);
+    showAlert('item edited', 'sucess');
     restoreForm();
   } else {
     showAlert('please enter value', 'fail');
