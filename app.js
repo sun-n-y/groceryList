@@ -20,31 +20,15 @@ form.addEventListener('submit', (e) => {
     showAlert('please enter value', 'fail');
   } else if (!editFlag && inputValue) {
     const id = new Date().getTime();
-    const element = document.createElement('div');
-    element.classList.add('list-item');
-    const attr = document.createAttribute('data-id');
-    attr.value = id;
-    element.setAttributeNode(attr);
-    element.innerHTML = `<p class="item-info">${inputValue}</p>
-                <div class="btn-container">
-                    <button class="edit-btn">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="trash-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>`;
-    const editBtn = element.querySelector('.edit-btn');
-    editBtn.addEventListener('click', editItem);
-    const deleteBtn = element.querySelector('.trash-btn');
-    deleteBtn.addEventListener('click', deleteItem);
-    listContainer.appendChild(element);
+    createElement(inputValue, id);
     setItemLocaleStorage(inputValue, id);
     showAlert('item added to list', 'sucess');
     restoreForm();
   } else if (editFlag && inputValue) {
     editElement.firstChild.textContent = inputValue;
+    editID = editElement.dataset.id;
     showAlert('item edited', 'sucess');
-    editItemLocaleStorage(inputValue, editElement.dataset.id);
+    editItemLocaleStorage(inputValue, editID);
     restoreForm();
   }
   if (listContainer.contains(listContainer.firstChild)) {
@@ -116,6 +100,7 @@ function deleteItem(e) {
     clearBtn.classList.add('show-clearbtn');
   } else {
     clearBtn.classList.remove('show-clearbtn');
+    localStorage.removeItem('list');
     showAlert('list emptied', 'fail');
   }
 }
@@ -145,12 +130,22 @@ function loadItems() {
   if (localStorage.getItem('list')) {
     let list = JSON.parse(localStorage.getItem('list'));
     list.forEach((item) => {
-      const element = document.createElement('div');
-      element.classList.add('list-item');
-      const attr = document.createAttribute('data-id');
-      attr.value = item.id;
-      element.setAttributeNode(attr);
-      element.innerHTML = `<p class="item-info">${item.value}</p>
+      createElement(item.value, item.id);
+    });
+    if (listContainer.contains(listContainer.firstChild)) {
+      clearBtn.classList.add('show-clearbtn');
+    }
+  }
+}
+
+//create list elements
+function createElement(value, id) {
+  const element = document.createElement('div');
+  element.classList.add('list-item');
+  const attr = document.createAttribute('data-id');
+  attr.value = id;
+  element.setAttributeNode(attr);
+  element.innerHTML = `<p class="item-info">${value}</p>
                 <div class="btn-container">
                     <button class="edit-btn">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -158,14 +153,9 @@ function loadItems() {
                     <button class="trash-btn">
                         <i class="fa-solid fa-trash"></i>
                     </button>`;
-      const editBtn = element.querySelector('.edit-btn');
-      editBtn.addEventListener('click', editItem);
-      const deleteBtn = element.querySelector('.trash-btn');
-      deleteBtn.addEventListener('click', deleteItem);
-      listContainer.appendChild(element);
-    });
-    if (listContainer.contains(listContainer.firstChild)) {
-      clearBtn.classList.add('show-clearbtn');
-    }
-  }
+  const editBtn = element.querySelector('.edit-btn');
+  editBtn.addEventListener('click', editItem);
+  const deleteBtn = element.querySelector('.trash-btn');
+  deleteBtn.addEventListener('click', deleteItem);
+  listContainer.appendChild(element);
 }
