@@ -76,7 +76,7 @@ function editItem(e) {
   e.preventDefault();
   const itemValue =
     e.target.parentElement.parentElement.previousElementSibling.textContent;
-  editElement = e.target.parentElement.parentElement.parentElement;
+  // editElement = e.target.parentElement.parentElement.parentElement;
   input.value = itemValue;
   editFlag = true;
   submitBtn.textContent = 'edit';
