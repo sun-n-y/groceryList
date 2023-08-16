@@ -112,9 +112,12 @@ function setItemLocaleStorage(value, id) {
 
 //edit item local storage
 function editItemLocaleStorage(value, id) {
-  const list = JSON.parse(localStorage.getItem('list'));
-  const searchObject = list.find((item) => item.id == id);
-  searchObject.value = value;
+  let list = JSON.parse(localStorage.getItem('list'));
+  list.find((obj) => {
+    if (obj.id == id) {
+      obj.value = value;
+    }
+  });
   localStorage.setItem('list', JSON.stringify(list));
 }
 
