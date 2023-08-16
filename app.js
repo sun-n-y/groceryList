@@ -84,14 +84,12 @@ function editItem(e) {
 //delete
 function deleteItem(e) {
   e.preventDefault();
-  const deleteId =
-    e.target.parentElement.parentElement.parentElement.dataset.id;
+  editElement = e.target.parentElement.parentElement.parentElement;
+  editID = editElement.dataset.id;
   let list = JSON.parse(localStorage.getItem('list'));
-  list = list.filter(function (obj) {
-    return obj.id != deleteId;
-  });
+  list = list.filter((obj) => obj.id != editID);
   localStorage.setItem('list', JSON.stringify(list));
-  listContainer.removeChild(e.target.parentElement.parentElement.parentElement);
+  listContainer.removeChild(editElement);
   showAlert('item removed', 'fail');
   restoreForm();
   if (listContainer.contains(listContainer.firstChild)) {
@@ -105,12 +103,9 @@ function deleteItem(e) {
 
 //set item to locale storage
 function setItemLocaleStorage(value, id) {
-  let list;
-  if (localStorage.getItem('list')) {
-    list = JSON.parse(localStorage.getItem('list'));
-  } else {
-    list = [];
-  }
+  let list = localStorage.getItem('list')
+    ? JSON.parse(localStorage.getItem('list'))
+    : [];
   list.push({ id, value });
   localStorage.setItem('list', JSON.stringify(list));
 }
