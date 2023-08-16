@@ -5,9 +5,9 @@ const submitBtn = document.querySelector('.submit-btn');
 const listContainer = document.querySelector('.list-container');
 const clearBtn = document.querySelector('.clear-btn');
 
+let editElement;
 let editFlag = false;
 let editID = '';
-let editElement;
 
 //load items from locale storage
 window.addEventListener('DOMContentLoaded', loadItems);
@@ -20,13 +20,12 @@ form.addEventListener('submit', (e) => {
     const id = new Date().getTime();
     createElement(inputValue, id);
     setItemLocaleStorage(inputValue, id);
-    showAlert('item added to list', 'sucess');
+    showAlert('item added to list', 'success');
     restoreForm();
   } else if (editFlag && inputValue) {
     editElement.firstChild.textContent = inputValue;
-    editID = editElement.dataset.id;
     editItemLocaleStorage(inputValue, editID);
-    showAlert('item edited', 'sucess');
+    showAlert('item edited', 'success');
     restoreForm();
   } else {
     showAlert('please enter value', 'fail');
