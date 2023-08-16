@@ -1,3 +1,4 @@
+//target elements
 const form = document.querySelector('.form-container');
 const alert = document.querySelector('.alert');
 const input = document.querySelector('#input');
@@ -8,6 +9,8 @@ const clearBtn = document.querySelector('.clear-btn');
 let editElement;
 let editFlag = false;
 let editID = '';
+
+//event listeners==================================================
 
 //load items from locale storage
 window.addEventListener('DOMContentLoaded', loadItems);
@@ -35,7 +38,7 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-// clear btn
+//clear btn
 clearBtn.addEventListener('click', (e) => {
   e.preventDefault();
   while (listContainer.firstChild) {
@@ -49,7 +52,7 @@ clearBtn.addEventListener('click', (e) => {
   }, 1000);
 });
 
-//helper functions==============================================
+//functions========================================================
 
 //show alert
 function showAlert(text, alertType) {
@@ -61,7 +64,7 @@ function showAlert(text, alertType) {
   }, 2000);
 }
 
-// restore form
+//restore form
 function restoreForm() {
   editElement = '';
   editFlag = false;
@@ -125,8 +128,8 @@ function editItemLocaleStorage(value, id) {
 function loadItems() {
   if (localStorage.getItem('list')) {
     let list = JSON.parse(localStorage.getItem('list'));
-    list.forEach((item) => {
-      createElement(item.value, item.id);
+    list.forEach((obj) => {
+      createElement(obj.value, obj.id);
     });
     if (listContainer.contains(listContainer.firstChild)) {
       clearBtn.classList.add('show-clearbtn');
@@ -134,7 +137,7 @@ function loadItems() {
   }
 }
 
-//create list elements
+//create list element
 function createElement(value, id) {
   const element = document.createElement('div');
   element.classList.add('list-item');
